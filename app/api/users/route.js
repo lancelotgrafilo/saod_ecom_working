@@ -4,7 +4,7 @@ import db from "@/lib/db";
 import { v4 as uuidv4 } from "uuid";
 import base64url from "base64url";
 import { Resend } from "resend";
-// import { EmailTemplate } from "@/components/email-template";
+import { EmailTemplate } from "@/components/email-template";
 export async function POST(request) {
   try {
     const resend = new Resend(process.env.RESEND_API_KEY);
@@ -45,29 +45,29 @@ export async function POST(request) {
     });
     console.log(newUser);
     // SEND THE EMAIL IF USER ROLE == FARMER
-    // if (role === "FARMER") {
-    //   //Send an Email with the Token on the link as a search param
-    //   const userId = newUser.id;
-    //   const linkText = "Verify Account";
-    //   const redirectUrl = `onboarding/${userId}?token=${token}`;
-    //   const description =
-    //     "Thank you, for Creating an Account with Us. We request you to click  on the link Below in order to Complete your onboarding Process. Thankyou";
-    //   const subject = "Account Verification - Limi Ecommerce";
-    //   const sendMail = await resend.emails.send({
-    //     from: "Desishub <info@jazzafricaadventures.com>",
-    //     to: email,
-    //     subject: subject,
-    //     react: EmailTemplate({
-    //       name,
-    //       redirectUrl,
-    //       linkText,
-    //       description,
-    //       subject,
-    //     }),
-    //   });
-    //   console.log(sendMail);
-    //   //Upon Click redirect them to the login
-    // }
+    if (role === "FARMER") {
+      //Send an Email with the Token on the link as a search param
+      const userId = newUser.id;
+      const linkText = "Verify Account";
+      const redirectUrl = `onboarding/${userId}?token=${token}`;
+      const description =
+        "Thank you, for Creating an Account with Us. We request you to click  on the link Below in order to Complete your onboarding Process. Thankyou";
+      const subject = "Account Verification - Limi Ecommerce";
+      const sendMail = await resend.emails.send({
+        from: "Saod eCom <saodecom@gmail.com>",
+        to: email,
+        subject: subject,
+        react: EmailTemplate({
+          name,
+          redirectUrl,
+          linkText,
+          description,
+          subject,
+        }),
+      });
+      console.log(sendMail);
+      //Upon Click redirect them to the login
+    }
     return NextResponse.json(
       {
         data: newUser,

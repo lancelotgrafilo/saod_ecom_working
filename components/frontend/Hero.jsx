@@ -5,10 +5,29 @@ import HeroCarousel from "./HeroCarousel";
 import advert from "../../public/adv.gif";
 import { CircleDollarSign, FolderSync, HelpCircle } from "lucide-react";
 import SidebarCategories from "./SidebarCategories";
-import { getData } from "@/lib/getData";
+// import { getData } from "@/lib/getData";
 
 export default async function Hero() {
-  const banners = await getData("banners");
+  // const banners = await getData("banners");
+
+  const banners = [
+    {
+      link: "/banner1",
+      imageUrl: "/banner1.jpg", // Replace with actual image paths
+      title: "Banner 1 Title",
+    },
+    {
+      link: "/banner2",
+      imageUrl: "/banner2.jpg", // Replace with actual image paths
+      title: "Banner 2 Title",
+    },
+    {
+      link: "/banner3",
+      imageUrl: "/banner3.jpg", // Replace with actual image paths
+      title: "Banner 3 Title",
+    },
+  ];
+
   return (
     <div className="grid grid-cols-12 gap-8 mb-6 ">
       <SidebarCategories />

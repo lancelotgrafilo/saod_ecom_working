@@ -37,23 +37,31 @@ export async function POST(request) {
 }
 export async function GET(request) {
   try {
-    const categories = await db.category.findMany({
+    console.log("Fetching categories...");
+
+    // Fetch categories with valid orderBy clause
+    const categories = await prisma.category.findMany({
       orderBy: {
-        createdAt: "desc",
+        id: "desc", // Use a valid field (e.g., `id`)
       },
       include: {
         products: true,
       },
     });
-    return NextResponse.json(categories);
+
+    return new Response(JSON.stringify(categories), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
   } catch (error) {
-    console.log(error);
-    return NextResponse.json(
+    console.error("Error fetching categories:", error);
+
+    return new Response(
+      JSON.stringify({ message: "Failed to Fetch Categories", error: error.message }),
       {
-        message: "Failed to Fetch Category",
-        error,
-      },
-      { status: 500 }
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      }
     );
   }
 }
