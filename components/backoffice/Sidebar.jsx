@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
-import logo from "../../public/limiLogo.webp";
+import logo from "../../public/4.png";
 import {
   Boxes,
   Building2,
@@ -76,7 +76,7 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
       href: "/dashboard/staff",
     },
     {
-      title: "Limi Community",
+      title: "Saod Community",
       icon: Building2,
       href: "/dashboard/community",
     },
@@ -205,7 +205,11 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
         className="px-6 py-4"
         href="/dashboard"
       >
-        <Image src={logo} alt="limifood logo" className="w-36" />
+        <Image 
+          src={logo} 
+          alt="saod logo" 
+          className="w-24 h-auto pl-4" 
+        />
       </Link>
       <div className="space-y-3 flex flex-col  ">
         <Link

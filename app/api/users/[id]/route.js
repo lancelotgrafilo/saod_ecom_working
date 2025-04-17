@@ -1,8 +1,11 @@
 import db from "@/lib/db";
 import { NextResponse } from "next/server";
 
-export async function GET(request, { params: { id } }) {
+export async function GET(request, { params }) {
   try {
+    // Await params before accessing its properties
+    const { id } = await params;
+
     const user = await db.user.findUnique({
       where: {
         id,
@@ -16,6 +19,7 @@ export async function GET(request, { params: { id } }) {
         profile: true,
       },
     });
+
     return NextResponse.json(user);
   } catch (error) {
     console.log(error);
@@ -28,13 +32,18 @@ export async function GET(request, { params: { id } }) {
     );
   }
 }
-export async function DELETE(request, { params: { id } }) {
+
+export async function DELETE(request, { params }) {
   try {
+    // Await params before accessing its properties
+    const { id } = await params;
+
     const existingUser = await db.user.findUnique({
       where: {
         id,
       },
     });
+
     if (!existingUser) {
       return NextResponse.json(
         {
@@ -44,11 +53,13 @@ export async function DELETE(request, { params: { id } }) {
         { status: 404 }
       );
     }
+
     const deletedUser = await db.user.delete({
       where: {
         id,
       },
     });
+
     return NextResponse.json(deletedUser);
   } catch (error) {
     console.log(error);
