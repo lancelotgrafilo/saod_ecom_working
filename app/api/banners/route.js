@@ -24,6 +24,7 @@ export async function POST(request) {
     );
   }
 }
+
 export async function GET(request) {
   try {
     const banners = await db.banner.findMany({
