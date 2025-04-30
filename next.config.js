@@ -6,6 +6,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "utfs.io",
       },
+      {
+        protocol: "https",
+        hostname: "s3.amazonaws.com"
+      }
     ],
   },
 };
